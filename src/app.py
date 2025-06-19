@@ -22,22 +22,52 @@ app.mount("/static", StaticFiles(directory=os.path.join(Path(__file__).parent,
 # In-memory activity database
 activities = {
     "Chess Club": {
-        "description": "Learn strategies and compete in chess tournaments",
-        "schedule": "Fridays, 3:30 PM - 5:00 PM",
-        "max_participants": 12,
-        "participants": ["michael@mergington.edu", "daniel@mergington.edu"]
-    },
-    "Programming Class": {
-        "description": "Learn programming fundamentals and build software projects",
-        "schedule": "Tuesdays and Thursdays, 3:30 PM - 4:30 PM",
+        "description": "Weekly chess matches and tournaments.",
         "max_participants": 20,
-        "participants": ["emma@mergington.edu", "sophia@mergington.edu"]
+        "participants": []
     },
-    "Gym Class": {
-        "description": "Physical education and sports activities",
-        "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
-        "max_participants": 30,
-        "participants": ["john@mergington.edu", "olivia@mergington.edu"]
+    "Robotics": {
+        "description": "Build and program robots for competitions.",
+        "max_participants": 15,
+        "participants": []
+    },
+    "Drama": {
+        "description": "Acting, directing, and stage production.",
+        "max_participants": 25,
+        "participants": []
+    },
+    # Sports related activities
+    "Soccer Team": {
+        "description": "Join the school soccer team for practice and matches.",
+        "max_participants": 22,
+        "participants": []
+    },
+    "Basketball Club": {
+        "description": "Weekly basketball training and inter-school games.",
+        "max_participants": 15,
+        "participants": []
+    },
+    # Artistic activities
+    "Art Club": {
+        "description": "Painting, drawing, and creative workshops.",
+        "max_participants": 18,
+        "participants": []
+    },
+    "Photography": {
+        "description": "Learn photography techniques and photo editing.",
+        "max_participants": 12,
+        "participants": []
+    },
+    # Intellectual activities
+    "Mathletes": {
+        "description": "Compete in math competitions and problem-solving sessions.",
+        "max_participants": 20,
+        "participants": []
+    },
+    "Debate Team": {
+        "description": "Practice public speaking and participate in debates.",
+        "max_participants": 16,
+        "participants": []
     }
 }
 
@@ -61,7 +91,16 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specific activity
     activity = activities[activity_name]
-
+    
+    # Validate student is not already signed up
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already signed up")
+    # Validate max participants not exceeded
+    if len(activity["participants"]) >= activity["max_participants"]:
+        raise HTTPException(status_code=400, detail="Maximum participants reached")
+    # Validate email format
+    if "@" not in email or "." not in email.split("@")[-1]:
+        raise HTTPException(status_code=400, detail="Invalid email format")
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
