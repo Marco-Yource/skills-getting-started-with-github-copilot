@@ -24,57 +24,76 @@ activities = {
     "Chess Club": {
         "description": "Weekly chess matches and tournaments.",
         "max_participants": 20,
-        "participants": []
+        "participants": [
+            "philippe.quintais@mergington.edu",
+            "henri.lacroix@mergington.edu"
+        ]
     },
     "Robotics": {
         "description": "Build and program robots for competitions.",
         "max_participants": 15,
-        "participants": []
+        "participants": [
+            "dylan.rocher@mergington.edu"
+        ]
     },
     "Drama": {
         "description": "Acting, directing, and stage production.",
         "max_participants": 25,
-        "participants": []
+        "participants": [
+            "claude.weibel@mergington.edu"
+        ]
     },
     # Sports related activities
     "Soccer Team": {
         "description": "Join the school soccer team for practice and matches.",
         "max_participants": 22,
-        "participants": []
+        "participants": [
+            "christian.fazzino@mergington.edu"
+        ]
     },
     "Basketball Club": {
         "description": "Weekly basketball training and inter-school games.",
         "max_participants": 15,
-        "participants": []
+        "participants": [
+            "marco.foyot@mergington.edu"
+        ]
     },
     # Artistic activities
     "Art Club": {
         "description": "Painting, drawing, and creative workshops.",
         "max_participants": 18,
-        "participants": []
+        "participants": [
+            "bruno.leboursicaud@mergington.edu"
+        ]
     },
     "Photography": {
         "description": "Learn photography techniques and photo editing.",
         "max_participants": 12,
-        "participants": []
+        "participants": [
+            "michel.hatchadourian@mergington.edu"
+        ]
     },
     # Intellectual activities
     "Mathletes": {
         "description": "Compete in math competitions and problem-solving sessions.",
         "max_participants": 20,
-        "participants": []
+        "participants": [
+            "sebastien.roche@mergington.edu"
+        ]
     },
     "Debate Team": {
         "description": "Practice public speaking and participate in debates.",
         "max_participants": 16,
-        "participants": []
+        "participants": [
+            "jean-marc.foyot@mergington.edu"
+        ]
     }
 }
 
 
 @app.get("/")
 def root():
-    return RedirectResponse(url="/static/index.html")
+    return RedirectResponse(url="/static/activities.html")
 
 
 @app.get("/activities")
